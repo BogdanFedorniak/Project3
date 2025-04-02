@@ -1,0 +1,120 @@
+<!-- Hero Section -->
+<section class="hero py-5">
+      <div class="hero-image">
+        <img src="/assets/images/hero-image.png" alt="Hero Image" class="img-fluid rounded">
+      </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories py-5">
+  <div class="container">
+    <h2 class="text-center mb-5 text-white">Популярні категорії</h2>
+    <div class="categories-wrapper d-flex flex-nowrap overflow-auto">
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/men.png" alt="Чоловікам" class="img-fluid">
+        <h5 class="mt-2 text-white">Чоловікам</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/shirts.png" alt="Сорочки" class="img-fluid">
+        <h5 class="mt-2 text-white">Сорочки</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/women.png" alt="Жінкам" class="img-fluid">
+        <h5 class="mt-2 text-white">Жінкам</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/tshirts.png" alt="Футболки" class="img-fluid">
+        <h5 class="mt-2 text-white">Футболки</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/shoes.png" alt="Взуття" class="img-fluid">
+        <h5 class="mt-2 text-white">Взуття</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/accessories.png" alt="Аксесуари" class="img-fluid">
+        <h5 class="mt-2 text-white">Аксесуари</h5>
+      </a>
+      <a href="#" class="category-item text-center mx-3">
+        <img src="assets/images/sportswear.png" alt="Спортивний одяг" class="img-fluid">
+        <h5 class="mt-2 text-white">Спортивний одяг</h5>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="products py-5">
+  <div class="container">
+    <h2 class="text-center mb-5 text-white">Хіти продажів</h2>
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-2 text-center mb-4" *ngFor="let product of products">
+        <div class="product-card position-relative">
+          <span class="badge bg-danger position-absolute">РОЗПРОДАЖА</span>
+          <img [src]="product.image" [alt]="product.name" class="img-fluid rounded">
+          <h5 class="mt-3 text-white">{{ product.name }}</h5>
+          <p class="text-muted">{{ product.price }} грн</p>
+          <button class="btn btn-outline-light btn-sm">В наявності</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands Section -->
+<section class="brands-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-4 text-white">Популярні бренди</h2>
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+      <img src="/assets/images/converse.png" alt="Converse" class="brand-logo">
+      <img src="/assets/images/zara.png" alt="Zara" class="brand-logo">
+      <img src="/assets/images/thenorthface.png" alt="The North Face" class="brand-logo">
+      <img src="/assets/images/puma.png" alt="Puma" class="brand-logo">
+      <img src="/assets/images/vans.png" alt="Vans" class="brand-logo">
+      <img src="/assets/images/adiddas.png" alt="Adidas" class="brand-logo">
+      <img src="/assets/images/nike.png" alt="Nike" class="brand-logo">
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about py-5">
+  <div class="container">
+    <h2 class="text-center mb-5 text-white">Про магазин</h2>
+    <div class="about-content text-center text-white">
+      <p *ngIf="!isExpanded">
+        Цей магазин є демо-версією.
+      </p>
+      <div *ngIf="isExpanded">
+        <h3 class="mt-4">Ваші бізнеси головної сторінки інтернет-магазину</h3>
+        <p>
+          Головна сторінка — це перше, що бачить клієнт після потрапляння на сайт. Вона має виражати суть вашого бізнесу, викликати довіру і спонукати до покупки. Зазвичай тексти, які використовуються на головній сторінці, короткі і не перевантажені інформацією. Вони мають бути зрозумілими і простими. Для зручності роботи на головній сторінці розміщують основні категорії товарів. Це спрощує пошук потрібного товару.
+        </p>
+        <h3 class="mt-4">Блок на головній сторінці</h3>
+        <p>
+          Керувати блоками їхньої послідовності дозволяють відобразити на головній сторінці асо необхідної інформації і скорочувати в будь-якому магазині що асортимент.
+        </p>
+        <p>
+          Внутрішня таблиця — відображення елементів каталогу і поразкової акції і кітки і кітки продажів.
+        </p>
+        <p>
+          Список товарів — категорії магазинів можна відобразити в рекламних форматах: популярні асо категорії, підкреслення асо елементів, із зображеннями асо сімей без них.
+        </p>
+        <p>
+          Блок популярних брендів показує покупці швидше елементів товару меншого бренду.
+        </p>
+        <p>
+          Переваги магазину — короткий текст, які розкажуть акції на покупці вашій компанії.
+        </p>
+        <p>
+          Внутрішні, скільки та статті будуть відобразити в одному форматі, якщо ви супроводжуєтеся інформацією.
+        </p>
+        <p>
+          Блог, якщо ви статті будуть відобразити в головному форматі, якщо ви супроводжуєтеся інформацією.
+        </p>
+      </div>
+      <button class="btn btn-outline-light mt-3" (click)="toggleExpand()">
+        {{ isExpanded ? 'Згорнути' : 'Розгорнути' }}
+      </button>
+    </div>
+  </div>
+</section>

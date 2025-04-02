@@ -1,0 +1,117 @@
+.header {
+  background-color: #000;
+  color: #fff;
+  position: relative; /* Щоб лінія позиціонувалася відносно хедера */
+  padding: 5px 0; /* Збільшений хедер */
+}
+
+.header::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px; /* Товщина лінії */
+  background-color: #ff3366; /* Колір лінії */
+  position: absolute;
+  bottom: 0; /* Лінія внизу хедера */
+  left: 0;
+}
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff007a;
+    cursor: pointer;
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+
+      &:hover {
+        color: #ff007a;
+      }
+    }
+
+    input {
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+    }
+  }
+
+  /* Стилі для іконки лупи */
+.search-icon {
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.search-icon:hover {
+  color: #ff007a;
+}
+
+  .dropdown {
+    position: relative;
+
+    .dropdown-toggle {
+      cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+
+      &:hover {
+        color: #ff007a;
+      }
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 150px;
+      z-index: 1;
+      top: 100%;
+      left: 0;
+
+      a {
+        display: block;
+        padding: 10px;
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #ff007a;
+        }
+      }
+    }
+
+    &:hover .dropdown-menu {
+      display: block;
+    }
+  }
+
+  .contact-section {
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #ff007a;
+      }
+    }
+
+    .cart {
+      .badge {
+        background-color: #ff007a !important;
+      }
+    }
+  }

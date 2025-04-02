@@ -1,0 +1,159 @@
+.breadcrumb {
+    padding: 10px 0;
+    font-size: 14px;
+    a {
+      color: #666;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    span {
+      color: #000;
+    }
+  }
+  
+  .product-detail-wrapper {
+    background-color: #000000;
+    padding: 20px;
+  }
+  
+  .product-detail-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .product-column {
+    &--left {
+      flex: 1;
+      min-width: 0; // Для коректного обтікання тексту
+    }
+    &--right {
+      flex: 0 0 40%; // Фіксована ширина для правої колонки
+      max-width: 400px;
+    }
+    &--sticky {
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+    }
+  }
+  
+  .product-image {
+    margin-bottom: 20px;
+    img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+  }
+  
+  .product-info {
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .availability {
+      color: green;
+      font-size: 14px;
+      margin-bottom: 10px;
+      span {
+        color: gray;
+        margin-left: 10px;
+      }
+    }
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .discount {
+      color: #ff4081;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+      .buy-btn, .quick-order-btn {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+      .buy-btn {
+        background-color: #ff4081;
+        color: white;
+      }
+      .quick-order-btn {
+        background-color: transparent;
+        border: 1px solid #ff4081;
+        color: #ff4081;
+      }
+      .icons {
+        display: flex;
+        gap: 10px;
+        .wishlist-btn, .compare-btn {
+          background: none;
+          border: none;
+          font-size: 20px;
+          cursor: pointer;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  .info-tabs {
+    margin-top: 20px;
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      button {
+        padding: 10px 20px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        &.active {
+          border-bottom: 2px solid #ff4081;
+          color: #ff4081;
+        }
+      }
+    }
+  
+    .tab-content {
+        .tab-pane {
+            display: none;
+            
+            &.active {
+                display: block;
+            }
+    
+            p {
+                margin: 5px 0;
+                color: white;
+            }
+        }
+    }
+  }
+  
+  .description {
+    margin-bottom: 20px;
+    h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: white;
+    }
+    p, ol {
+      margin-bottom: 15px;
+      color: white;
+    }
+  }

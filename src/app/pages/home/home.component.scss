@@ -1,0 +1,170 @@
+.hero {
+  background-color: #000000;
+  .hero-content {
+    background-color: white;
+    border-radius: 20px;
+    min-height: 400px;
+  }
+  .hero-text {
+    max-width: 60%;
+    .new-collection {
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      color: #ff3366;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    h2 {
+      color: #333;
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+    .btn {
+      background-color: #333;
+      color: white;
+      border-color: #333;
+      padding: 0.5rem 1.5rem;
+      &:hover {
+        background-color: #ff3366;
+        border-color: #ff3366;
+      }
+    }
+  }
+  .hero-image {
+    max-width: 100%;
+    .image-wrapper {
+      background-color: #ff3366;
+      border-radius: 10px;
+      padding: 10px;
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+
+.categories {
+  background-color: #000000;
+  h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  .categories-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .category-item {
+      flex: 1;
+      text-decoration: none;
+      img {
+        max-height: 200px;
+        object-fit: contain;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+      h5 {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.products {
+  background-color: #000000;
+  h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  .product-card {
+    span {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ff3366;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.7rem;
+      border-radius: 5px;
+    }
+    img {
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    h5 {
+      color: rgb(255, 255, 255);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .btn {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      &:hover {
+        background-color: #ff3366;
+        border-color: #ff3366;
+      }
+    }
+  }
+}
+
+.brands-section {
+  padding: 40px 0;
+}
+
+.brand-logo {
+  height: 100px;
+  width: 110px;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px; /* Додає відстань навколо кожного логотипа */
+}
+
+.about {
+  background-color: #000000;
+  h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  .about-content {
+    p, h3 {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: white;
+    }
+    h3 {
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      &:hover {
+        background-color: #ff3366;
+        border-color: #ff3366;
+      }
+    }
+  }
+}

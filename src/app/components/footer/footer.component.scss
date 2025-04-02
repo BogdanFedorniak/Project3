@@ -1,0 +1,53 @@
+.footer {
+    background-color: #000;
+    color: white;
+    padding: 40px 0;
+    position: relative;
+}
+
+.footer::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px; /* Товщина лінії */
+    background-color: #ff3366; /* Колір лінії */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.footer .logo {
+    color: #ff3366;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer p, .footer a {
+    font-size: 0.9rem;
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #ff3366;
+}
+
+.payment-icon {
+    height: 30px;
+}
+
+.social-icons a {
+    font-size: 1.4rem;
+    color: white;
+}
+
+.social-icons a:hover {
+    color: #ff3366;
+}

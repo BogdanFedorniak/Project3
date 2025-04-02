@@ -1,0 +1,44 @@
+<header class="header py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- Logo -->
+    <div class="logo" [routerLink]="['/']">SPHERE WEAR</div>
+
+    <!-- Navigation -->
+    <nav>
+      <!-- Дропдаун для "Чоловікам" -->
+      <div class="dropdown">
+        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'men' }">Чоловікам</a>
+        <div class="dropdown-menu">
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'tshirts' }">Футболки</a>
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'hoodies' }">Худі</a>
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'pants' }">Штани</a>
+        </div>
+      </div>
+      <!-- Дропдаун для "Жінкам" -->
+      <div class="dropdown">
+        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'women' }">Жінкам</a>
+        <div class="dropdown-menu">
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'tshirts' }">Футболки</a>
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'dresses' }">Сукні</a>
+          <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'pants' }">Штани</a>
+        </div>
+      </div>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'shoes', subcategory: 'shoes' }">Взуття</a>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'accessories', subcategory: 'accessories' }">Аксесуари</a>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'sportswear', subcategory: 'sportswear' }">Спортивний одяг</a>
+      <i class="bi bi-search search-icon"></i>
+    </nav>
+
+    <!-- Contact and Cart -->
+    <div class="d-flex align-items-center contact-section">
+      <a href="tel:0440000000" class="text-white d-flex align-items-center">
+        <i class="bi bi-telephone-fill me-2"></i> 0 444 000-00-00
+      </a>
+      <a href="#" class="cart d-flex align-items-center text-white mx-3">
+        <i class="bi bi-bag-fill me-2"></i>
+        <span class="badge bg-danger me-2">0</span>
+        Мій кошик
+      </a>
+    </div>
+  </div>
+

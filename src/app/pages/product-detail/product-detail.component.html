@@ -1,0 +1,90 @@
+<div class="breadcrumb">
+    <a [routerLink]="['/']">Головна</a> > 
+    <a [routerLink]="['/products']" [queryParams]="{ category: category }">
+      {{ category === 'men' ? 'Чоловікам' : category === 'women' ? 'Жінкам' : category === 'shoes' ? 'Взуття' : category === 'accessories' ? 'Аксесуари' : 'Спортивний одяг' }}
+    </a>
+    <ng-container *ngIf="subcategory">
+      > 
+      <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: subcategory }">
+        {{ subcategory === 'tshirts' ? 'Футболки' : subcategory === 'hoodies' ? 'Худі' : subcategory === 'dresses' ? 'Сукні' : subcategory === 'pants' ? 'Штани' : subcategory }}
+      </a>
+    </ng-container>
+    <ng-container *ngIf="product">
+      > 
+      <span>{{ product.name }}</span>
+    </ng-container>
+  </div>
+  
+  <main *ngIf="product">
+    <div class="product-detail-wrapper">
+      <div class="product-detail-container">
+        <!-- Ліва колонка (прокручується) -->
+        <div class="product-column product-column--left">
+          <!-- Зображення товару -->
+          <div class="product-image">
+            <img [src]="product.image" [alt]="product.name">
+          </div>
+  
+          <!-- Опис -->
+          <div class="description">
+            <h2>Опис</h2>
+            <p>
+              Футболка — це ідеальне поєднання комфорту та стилю, що давно стало невід'ємною частиною повсякденного гардеробу. Цей універсальний елемент одягу підходить для будь-якої пори року, додаючи вашому образу легкості, невимушеності та елегантності.
+            </p>
+            <h3>Переваги футболки</h3>
+            <ol>
+              <li>Комфорт. Футболка виготовлена з м'яких і приємних на дотик матеріалів, таких як бавовна, фліс або суміш бавовни з поліестером. Вони забезпечують тепло і комфорт, не обмежуючи рухів.</li>
+              <li>Стиль. Футболка вдало уникає кидкості моделі до повсякденного стилю, що дозволяє прикрити — іконка за основною зайнятістю.</li>
+              <li>Універсальність. Футболка легко комбінується з різними елементами гардеробу. Вони підходять для повсякденного носіння, занять спортом, прогулянок або навіть неформальних зустрічей.</li>
+            </ol>
+          </div>
+        </div>
+  
+        <!-- Права колонка (фіксована) -->
+        <div class="product-column product-column--right product-column--sticky">
+          <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="availability">В наявності <span>Артикул {{ product.id }}</span></p>
+            <p class="price">{{ product.price }} грн</p>
+            <div class="actions">
+              <button class="buy-btn" (click)="addToCart()">Купити</button>
+              <button class="quick-order-btn" (click)="quickOrder()">Замовити швидко</button>
+              <div class="icons">
+                <button class="compare-btn" (click)="addToCompare()">⇄</button>
+                <button class="wishlist-btn" (click)="addToWishlist()">♡</button>
+              </div>
+            </div>
+  
+            <!-- Вкладки для доставки, оплати, гарантії -->
+            <div class="info-tabs">
+              <div class="tab-buttons">
+                <button [class.active]="activeInfoTab === 'delivery'" (click)="setActiveTab('delivery')">Доставка</button>
+                <button [class.active]="activeInfoTab === 'payment'" (click)="setActiveTab('payment')">Оплата</button>
+                <button [class.active]="activeInfoTab === 'warranty'" (click)="setActiveTab('warranty')">Гарантія</button>
+                
+              </div>
+  
+              <div class="tab-content">
+                <div *ngIf="activeInfoTab === 'delivery'" class="tab-pane active">
+                    <p>Самовивіз з нашого магазину — безкоштовно.</p>
+                    <p>«Новою поштою» по Україні — 80 грн.</p>
+                    <p>Кур'єром по Києву — 55 грн.</p>
+                    <p>Безкоштовна при замовленні від 1500 грн.</p>
+                </div>
+            
+                <div *ngIf="activeInfoTab === 'payment'" class="tab-pane active">
+                    <p>- Готівкою при отриманні</p>
+                    <p>- Кредитною карткою</p>
+                </div>
+            
+                <div *ngIf="activeInfoTab === 'warranty'" class="tab-pane active">
+                    <p>Гарантія від виробника 12 місяців.</p>
+                </div>
+            </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
