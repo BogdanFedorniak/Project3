@@ -1,0 +1,127 @@
+<div class="profile-container container py-5">
+  <div class="row">
+    <!-- Бічна панель -->
+    <div class="col-md-3">
+      <div class="sidebar">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="activeTab === 'settings'"
+              (click)="setActiveTab('settings')"
+            >
+              Дані та налаштування
+            </a>
+          </li>
+          <li class="nav-item logout-item">
+            <a
+              class="nav-link"
+              [class.active]="activeTab === 'logout'"
+              (click)="setActiveTab('logout')"
+            >
+              Вихід
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Основний контент -->
+    <div class="col-md-9">
+      <!-- Вкладка: Дані та налаштування -->
+      @if (activeTab === 'settings') {
+        <div class="tab-content card p-4">
+          <div class="settings">
+            <div class="user-header">
+              <img [src]="avatarUrl" alt="Аватар" class="avatar" />
+              <div>
+                <h3>Вітаємо, {{ username }}!</h3>
+                <p class="email">{{ email }}</p>
+              </div>
+            </div>
+
+            @if (isEditingSettings) {
+              <form (ngSubmit)="saveProfile()">
+                <div class="mb-3">
+                  <label for="avatarSettings" class="form-label">Змінити аватар:</label>
+                  <input type="file" id="avatarSettings" class="form-control" (change)="onAvatarChange($event)" accept="image/*" />
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="firstNameSettings" class="form-label">Ім'я:</label>
+                      <input
+                        type="text"
+                        id="firstNameSettings"
+                        class="form-control"
+                        [(ngModel)]="firstName"
+                        name="firstNameSettings"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="lastNameSettings" class="form-label">Прізвище:</label>
+                      <input
+                        type="text"
+                        id="lastNameSettings"
+                        class="form-control"
+                        [(ngModel)]="lastName"
+                        name="lastNameSettings"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="phoneSettings" class="form-label">Телефон:</label>
+                      <input
+                        type="tel"
+                        id="phoneSettings"
+                        class="form-control"
+                        [(ngModel)]="phone"
+                        name="phoneSettings"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="addressSettings" class="form-label">Адреса доставки:</label>
+                      <input
+                        type="text"
+                        id="addressSettings"
+                        class="form-control"
+                        [(ngModel)]="address"
+                        name="addressSettings"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Зберегти</button>
+                <button type="button" class="btn btn-secondary" (click)="toggleEditSettings()">Скасувати</button>
+              </form>
+            } @else {
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Ім'я:</strong> {{ firstName || 'Не вказано' }}</p>
+                  <p><strong>Прізвище:</strong> {{ lastName || 'Не вказано' }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Телефон:</strong> {{ phone || 'Не вказано' }}</p>
+                  <p><strong>Адреса доставки:</strong> {{ address || 'Не вказано' }}</p>
+                </div>
+              </div>
+              <button class="btn btn-primary" (click)="toggleEditSettings()">Редагувати дані</button>
+            }
+
+            <div class="settings-item mt-4">
+              <h4>Зміна пароля</h4>
+              <button class="btn btn-primary" (click)="changePassword()">Змінити пароль</button>
+            </div>
+
+            <!-- Кошик -->
+            <div class="cart-section mt-4">
+              <h3>Ваш кошик</h3>
+              <p>Ваш кошик порожній.</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

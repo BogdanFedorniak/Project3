@@ -1,50 +1,124 @@
 .hero {
   background-color: #000000;
-  .hero-content {
-    background-color: white;
-    border-radius: 20px;
-    min-height: 400px;
-  }
-  .hero-text {
-    max-width: 60%;
-    .new-collection {
-      color: #333;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+  position: relative;
+  min-height: 500px; // Гарантуємо мінімальну висоту
+
+  .hero-slider {
+    position: relative;
+    overflow: hidden;
+    height: 100%; // Забезпечуємо, що слайдер займає простір
+    min-height: 500px;
+
+    .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.5s ease;
+
+      &.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+
+        .hero-text {
+          max-width: 60%;
+          padding: 20px;
+
+          .discount-badge {
+            display: inline-block;
+            background-color: #ff3366;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 10px;
+          }
+
+          h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ff3366;
+            text-transform: uppercase;
+            margin: 0;
+          }
+
+          h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 10px 0;
+          }
+
+          .btn {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+
+            &:hover {
+              background-color: #ff1a4d;
+            }
+          }
+        }
+      }
     }
-    h1 {
-      color: #ff3366;
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-    h2 {
-      color: #333;
-      font-size: 2.5rem;
-      font-weight: 600;
-    }
-    .btn {
-      background-color: #333;
+
+    .slider-prev, .slider-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
-      border-color: #333;
-      padding: 0.5rem 1.5rem;
+      border: none;
+      font-size: 2rem;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+
       &:hover {
-        background-color: #ff3366;
-        border-color: #ff3366;
+        background-color: rgba(0, 0, 0, 0.8);
       }
     }
-  }
-  .hero-image {
-    max-width: 100%;
-    .image-wrapper {
-      background-color: #ff3366;
-      border-radius: 10px;
-      padding: 10px;
-      img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-      }
+
+    .slider-prev {
+      left: 10px;
+    }
+
+    .slider-next {
+      right: 10px;
     }
   }
 }

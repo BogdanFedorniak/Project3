@@ -4,41 +4,101 @@
     <div class="logo" [routerLink]="['/']">SPHERE WEAR</div>
 
     <!-- Navigation -->
-    <nav>
-      <!-- Дропдаун для "Чоловікам" -->
+    <nav class="nav-menu">
       <div class="dropdown">
-        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'men' }">Чоловікам</a>
+        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'men' }">
+          <i class="fas fa-male me-2"></i>Чоловікам
+        </a>
         <div class="dropdown-menu">
           <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'tshirts' }">Футболки</a>
           <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'hoodies' }">Худі</a>
           <a [routerLink]="['/products']" [queryParams]="{ category: 'men', subcategory: 'pants' }">Штани</a>
         </div>
       </div>
-      <!-- Дропдаун для "Жінкам" -->
       <div class="dropdown">
-        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'women' }">Жінкам</a>
+        <a class="dropdown-toggle" [routerLink]="['/products']" [queryParams]="{ category: 'women' }">
+          <i class="fas fa-female me-2"></i>Жінкам
+        </a>
         <div class="dropdown-menu">
           <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'tshirts' }">Футболки</a>
           <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'dresses' }">Сукні</a>
           <a [routerLink]="['/products']" [queryParams]="{ category: 'women', subcategory: 'pants' }">Штани</a>
         </div>
       </div>
-      <a [routerLink]="['/products']" [queryParams]="{ category: 'shoes', subcategory: 'shoes' }">Взуття</a>
-      <a [routerLink]="['/products']" [queryParams]="{ category: 'accessories', subcategory: 'accessories' }">Аксесуари</a>
-      <a [routerLink]="['/products']" [queryParams]="{ category: 'sportswear', subcategory: 'sportswear' }">Спортивний одяг</a>
-      <i class="bi bi-search search-icon"></i>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'shoes', subcategory: 'shoes' }">
+        <i class="fas fa-shoe-prints me-2"></i>Взуття
+      </a>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'accessories', subcategory: 'accessories' }">
+        <i class="fas fa-gem me-2"></i>Аксесуари
+      </a>
+      <a [routerLink]="['/products']" [queryParams]="{ category: 'sportswear', subcategory: 'sportswear' }">
+        <i class="fas fa-running me-2"></i>Спортивний одяг
+      </a>
+      <!-- Пошук -->
+      <div class="search-container">
+        <i class="fas fa-search search-icon" (click)="toggleSearch()"></i>
+        @if (isSearchOpen) {
+          <div class="search-box">
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (input)="searchProducts()"
+              placeholder="Пошук товарів..."
+              autofocus
+            />
+            <div class="search-results" *ngIf="filteredProducts.length > 0">
+              @for (product of filteredProducts; track product.id) {
+                <a
+                  [routerLink]="['/product', product.id]"
+                  [queryParams]="{ category: product.category, subcategory: product.subcategory }"
+                  class="search-result-item"
+                  (click)="closeSearch()"
+                >
+                  <img [src]="product.image || 'https://via.placeholder.com/50'" [alt]="product.name" />
+                  <div class="search-result-details">
+                    <span>{{ product.name }}</span>
+                    <span>{{ product.price }} грн</span>
+                  </div>
+                </a>
+              }
+            </div>
+            <div class="search-results" *ngIf="searchQuery && filteredProducts.length === 0">
+              <p>Нічого не знайдено.</p>
+            </div>
+          </div>
+        }
+      </div>
     </nav>
 
-    <!-- Contact and Cart -->
-    <div class="d-flex align-items-center contact-section">
-      <a href="tel:0440000000" class="text-white d-flex align-items-center">
-        <i class="bi bi-telephone-fill me-2"></i> 0 444 000-00-00
+    <!-- User Section -->
+    <div class="user-section d-flex align-items-center">
+      <a [routerLink]="['/wishlist']" class="text-white mx-3">
+        <i class="fas fa-heart"></i>
       </a>
-      <a href="#" class="cart d-flex align-items-center text-white mx-3">
-        <i class="bi bi-bag-fill me-2"></i>
-        <span class="badge bg-danger me-2">0</span>
-        Мій кошик
+      <a [routerLink]="['/compare']" class="text-white mx-3">
+        <i class="fas fa-exchange-alt"></i>
       </a>
+      <a [routerLink]="['/cart']" class="cart d-flex align-items-center text-white mx-3">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
+      <div class="profile-section d-flex align-items-center">
+        @if (authService.isLoggedIn()) {
+          <a [routerLink]="['/profile']" class="text-white me-2">
+            <i class="fas fa-user me-2"></i>Мій профіль
+          </a>
+          <a (click)="logout()" class="text-white">
+            <i class="fas fa-sign-out-alt me-2"></i>Вийти
+          </a>
+        } @else {
+          <a [routerLink]="['/login']" class="text-white me-2">
+            Увійти
+          </a>
+          <a [routerLink]="['/register']" class="text-white">
+            Реєстрація
+          </a>
+        }
+      </div>
     </div>
   </div>
-
+</header>

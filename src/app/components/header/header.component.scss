@@ -1,62 +1,90 @@
+// Підключаємо Google Fonts (Montserrat для логотипу, Poppins для тексту)
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap');
+
 .header {
   background-color: #000;
   color: #fff;
   position: relative;
-  padding: 5px 0;
-}
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; // Зменшуємо горизонтальні відступи (було 40px)
 
-.header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 4px;
-  background-color: #ff3366;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff007a;
-    cursor: pointer;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #ff3366;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
-  nav {
+  .logo {
+    font-size: 34px;
+    font-weight: 700;
+    color: #ff007a;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-right: 20px; // Додаємо невеликий відступ справа від логотипу
+
+    &:hover {
+      color: #ff3366;
+    }
+  }
+
+  .nav-menu {
     display: flex;
-    gap: 20px;
+    gap: 8px; // Зменшуємо відстань між пунктами меню
     align-items: center;
 
     a {
       color: #fff;
       text-decoration: none;
       font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      padding: 6px 8px; // Зменшуємо горизонтальні відступи
+      border-radius: 5px;
+      transition: all 0.3s;
 
       &:hover {
         color: #ff007a;
-      }
-    }
+        background-color: rgba(255, 0, 122, 0.1);
 
-    input {
-      padding: 5px;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: #fff;
+        i {
+          color: #ff007a;
+        }
+      }
+
+      i {
+        color: #fff;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
     }
   }
 
-.search-icon {
-  cursor: pointer;
-  font-size: 20px;
-  color: #fff;
-  transition: color 0.3s;
-}
+  .search-icon {
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    padding: 6px;
+    border-radius: 5px;
+    transition: all 0.3s;
 
-.search-icon:hover {
-  color: #ff007a;
-}
+    &:hover {
+      color: #ff007a;
+      background-color: rgba(255, 0, 122, 0.1);
+    }
+  }
 
   .dropdown {
     position: relative;
@@ -66,29 +94,48 @@
       color: #fff;
       text-decoration: none;
       font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: 5px;
 
       &:hover {
         color: #ff007a;
+        background-color: rgba(255, 0, 122, 0.1);
+
+        i {
+          color: #ff007a;
+        }
       }
     }
 
     .dropdown-menu {
       display: none;
       position: absolute;
-      background-color: #333;
-      min-width: 150px;
-      z-index: 1;
+      background-color: #222;
+      min-width: 160px;
+      z-index: 1000;
       top: 100%;
       left: 0;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border: 1px solid #ff007a;
 
       a {
         display: block;
-        padding: 10px;
+        padding: 8px 12px;
         color: #fff;
         text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all 0.3s;
 
         &:hover {
           background-color: #ff007a;
+          color: #fff;
         }
       }
     }
@@ -98,19 +145,251 @@
     }
   }
 
-  .contact-section {
+  .user-section {
+    display: flex;
+    gap: 0; // Прибираємо gap, щоб максимально зменшити відстань
+
     a {
       color: #fff;
       text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      padding: 6px 6px; // Зменшуємо горизонтальні відступи
+      border-radius: 5px;
+      transition: all 0.3s;
 
       &:hover {
         color: #ff007a;
+        background-color: rgba(255, 0, 122, 0.1);
+
+        i {
+          color: #ff007a;
+        }
+      }
+
+      i {
+        color: #fff;
+        font-size: 16px;
+        transition: color 0.3s;
+        margin-right: 4px; // Невеликий відступ між іконкою і текстом
       }
     }
 
     .cart {
+      position: relative;
+
       .badge {
         background-color: #ff007a !important;
+        border-radius: 50%;
+        padding: 3px 6px;
+        font-size: 12px;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        border: 1px solid #fff;
       }
     }
   }
+
+  .profile-section {
+    a {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 6px 8px;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: rgba(255, 0, 122, 0.1);
+      }
+    }
+    
+  }
+}
+
+// Адаптивність для менших екранів
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 15px;
+    min-height: 100px;
+
+    .logo {
+      font-size: 28px;
+      margin-right: 15px;
+    }
+
+    .nav-menu,
+    .user-section {
+      gap: 0;
+
+      a,
+      .dropdown-toggle,
+      .dropdown-menu a {
+        font-size: 14px;
+        padding: 4px 6px;
+      }
+
+      i,
+      .search-icon {
+        font-size: 14px;
+      }
+
+      .cart .badge {
+        font-size: 10px;
+        padding: 2px 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 10px;
+    min-height: 80px;
+    flex-wrap: wrap; // Дозволяємо перенос елементів на менших екранах
+    justify-content: center;
+
+    .logo {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .nav-menu {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+
+      a,
+      .dropdown-toggle,
+      .dropdown-menu a {
+        font-size: 12px;
+        padding: 4px 5px;
+      }
+
+      i,
+      .search-icon {
+        font-size: 12px;
+      }
+    }
+
+    .user-section {
+      gap: 0;
+
+      a {
+        font-size: 12px;
+        padding: 4px 5px;
+
+        i {
+          font-size: 12px;
+          margin-right: 3px;
+        }
+      }
+
+      .cart .badge {
+        font-size: 8px;
+        padding: 2px 3px;
+      }
+    }
+  }
+}
+.search-container {
+  position: relative;
+
+  .search-box {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 600px; /* Зменшуємо ширину для компактності */
+    background-color: #222;
+    border: 1px solid #ff007a;
+    border-radius: 5px;
+    z-index: 1000;
+    padding: 5px; /* Зменшуємо відступи */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    input {
+      width: 100%;
+      padding: 4px; /* Зменшуємо відступи */
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px; /* Дуже маленький шрифт для поля введення */
+
+      &:focus {
+        outline: none;
+        background-color: #444;
+      }
+    }
+
+    .search-results {
+      max-height: 400px; /* Зменшуємо максимальну висоту */
+      overflow-y: auto;
+      margin-top: 5px; /* Зменшуємо відступ зверху */
+
+      .search-result-item {
+        display: flex;
+        align-items: center;
+        padding: 4px; /* Зменшуємо відступи всередині */
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px solid #444;
+
+        &:hover {
+          background-color: #ff007a;
+        }
+
+        img {
+          width: 80px; /* Зменшуємо розмір зображення */
+          height: 80px;
+          object-fit: cover;
+          margin-right: 5px; /* Зменшуємо відступ справа */
+          border-radius: 5px;
+        }
+
+        .search-result-details {
+          display: flex;
+          flex-direction: column;
+
+          span:first-child {
+            font-size: 12px; /* Зменшуємо розмір шрифту назви */
+            font-weight: 500;
+          }
+
+          span:last-child {
+            font-size: 10px; /* Зменшуємо розмір шрифту ціни */
+            color: #ccc;
+          }
+        }
+      }
+
+      p {
+        color: #777;
+        text-align: center;
+        margin: 5px 0; /* Зменшуємо відступи */
+        font-size: 10px; /* Зменшуємо розмір шрифту */
+      }
+    }
+    .user-section {
+      gap: 0;
+
+      a {
+        font-size: 12px;
+        padding: 4px 5px;
+
+        i {
+          font-size: 12px;
+          margin-right: 3px;
+        }
+      }
+
+      .cart .badge {
+        font-size: 8px;
+        padding: 2px 3px;
+      }
+    }
+  }
+}

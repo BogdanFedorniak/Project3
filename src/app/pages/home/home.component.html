@@ -1,8 +1,19 @@
 <!-- Hero Section -->
 <section class="hero py-5">
+  <div class="hero-slider">
+    <div class="slide" *ngFor="let slide of slides; let i = index" [ngClass]="{'active': currentSlide === i}">
       <div class="hero-image">
-        <img src="/assets/images/hero-image.png" alt="Hero Image" class="img-fluid rounded">
+        <img [src]="slide.image" [alt]="slide.alt" class="img-fluid rounded">
       </div>
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <a href="/products" class="btn btn-primary">Ознайомитись з колекцією</a>
+        </div>
+      </div>
+    </div>
+    <button class="slider-prev" (click)="prevSlide()">❮</button>
+    <button class="slider-next" (click)="nextSlide()">❯</button>
+  </div>
 </section>
 
 <!-- Categories Section -->
@@ -10,33 +21,9 @@
   <div class="container">
     <h2 class="text-center mb-5 text-white">Популярні категорії</h2>
     <div class="categories-wrapper d-flex flex-nowrap overflow-auto">
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/men.png" alt="Чоловікам" class="img-fluid">
-        <h5 class="mt-2 text-white">Чоловікам</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/shirts.png" alt="Сорочки" class="img-fluid">
-        <h5 class="mt-2 text-white">Сорочки</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/women.png" alt="Жінкам" class="img-fluid">
-        <h5 class="mt-2 text-white">Жінкам</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/tshirts.png" alt="Футболки" class="img-fluid">
-        <h5 class="mt-2 text-white">Футболки</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/shoes.png" alt="Взуття" class="img-fluid">
-        <h5 class="mt-2 text-white">Взуття</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/accessories.png" alt="Аксесуари" class="img-fluid">
-        <h5 class="mt-2 text-white">Аксесуари</h5>
-      </a>
-      <a href="#" class="category-item text-center mx-3">
-        <img src="assets/images/sportswear.png" alt="Спортивний одяг" class="img-fluid">
-        <h5 class="mt-2 text-white">Спортивний одяг</h5>
+      <a href="#" class="category-item text-center mx-3" *ngFor="let category of categories">
+        <img [src]="category.image" [alt]="category.name" class="img-fluid">
+        <h5 class="mt-2 text-white">{{ category.name }}</h5>
       </a>
     </div>
   </div>

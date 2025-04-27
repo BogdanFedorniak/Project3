@@ -1,50 +1,118 @@
 <div class="breadcrumb">
-  <a [routerLink]="['/']">Головна</a> > 
+  <a [routerLink]="['/']">Головна</a> >
   <a [routerLink]="['/products']" [queryParams]="{ category: category }">
-    {{ category === 'men' ? 'Чоловікам' : category === 'women' ? 'Жінкам' : category === 'shoes' ? 'Взуття' : category === 'accessories' ? 'Аксесуари' : 'Спортивний одяг' }}
+    {{
+      category === 'men'
+        ? 'Чоловікам'
+        : category === 'women'
+          ? 'Жінкам'
+          : category === 'shoes'
+            ? 'Взуття'
+            : category === 'accessories'
+              ? 'Аксесуари'
+              : 'Спортивний одяг'
+    }}
   </a>
-  <!-- Додаємо підкатегорію в breadcrumb, лише якщо вона вказана -->
-  <ng-container *ngIf="subcategory">
-    > 
+  @if (subcategory) {
+    >
     <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: subcategory }">
-      {{ subcategory === 'tshirts' ? 'Футболки' : subcategory === 'hoodies' ? 'Худі' : subcategory === 'dresses' ? 'Сукні' : subcategory === 'pants' ? 'Штани' : subcategory }}
+      {{
+        subcategory === 'tshirts'
+          ? 'Футболки'
+          : subcategory === 'hoodies'
+            ? 'Худі'
+            : subcategory === 'dresses'
+              ? 'Сукні'
+              : subcategory === 'pants'
+                ? 'Штани'
+                : subcategory
+      }}
     </a>
-  </ng-container>
+  }
 </div>
 
 <main>
   <div class="container">
     <aside class="filters">
       <h2>
-        {{ 
-          subcategory 
-            ? (subcategory === 'tshirts' ? 'Футболки' : subcategory === 'hoodies' ? 'Худі' : subcategory === 'dresses' ? 'Сукні' : subcategory === 'pants' ? 'Штани' : subcategory) 
-            : (category === 'men' ? 'Чоловікам' : category === 'women' ? 'Жінкам' : category === 'shoes' ? 'Взуття' : category === 'accessories' ? 'Аксесуари' : 'Спортивний одяг') 
+        {{
+          subcategory
+            ? (subcategory === 'tshirts'
+              ? 'Футболки'
+              : subcategory === 'hoodies'
+                ? 'Худі'
+                : subcategory === 'dresses'
+                  ? 'Сукні'
+                  : subcategory === 'pants'
+                    ? 'Штани'
+                    : subcategory)
+            : (category === 'men'
+              ? 'Чоловікам'
+              : category === 'women'
+                ? 'Жінкам'
+                : category === 'shoes'
+                  ? 'Взуття'
+                  : category === 'accessories'
+                    ? 'Аксесуари'
+                    : 'Спортивний одяг')
         }}
       </h2>
       <ul>
-        <!-- Фільтри для чоловіків -->
-        <ng-container *ngIf="category === 'men'">
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'tshirts' }">Футболки</a></li>
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'hoodies' }">Худі</a></li>
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'pants' }">Штани</a></li>
-        </ng-container>
-        <!-- Фільтри для жінок -->
-        <ng-container *ngIf="category === 'women'">
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'tshirts' }">Футболки</a></li>
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'dresses' }">Сукні</a></li>
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'pants' }">Штани</a></li>
-        </ng-container>
-        <!-- Фільтри для інших категорій (без підкатегорій) -->
-        <ng-container *ngIf="category === 'shoes' || category === 'accessories' || category === 'sportswear'">
-          <li><a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: category }">{{ category === 'shoes' ? 'Взуття' : category === 'accessories' ? 'Аксесуари' : 'Спортивний одяг' }}</a></li>
-        </ng-container>
+        @if (category === 'men') {
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'tshirts' }"
+            >Футболки</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'hoodies' }"
+            >Худі</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'pants' }"
+            >Штани</a
+            >
+          </li>
+        }
+        @if (category === 'women') {
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'tshirts' }"
+            >Футболки</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'dresses' }"
+            >Сукні</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/products']" [queryParams]="{ category: category, subcategory: 'pants' }"
+            >Штани</a
+            >
+          </li>
+        }
+        @if (category === 'shoes' || category === 'accessories' || category === 'sportswear') {
+          <li>
+            <a
+              [routerLink]="['/products']"
+              [queryParams]="{ category: category, subcategory: category }"
+            >{{
+                category === 'shoes'
+                  ? 'Взуття'
+                  : category === 'accessories'
+                    ? 'Аксесуари'
+                    : 'Спортивний одяг'
+              }}</a
+            >
+          </li>
+        }
       </ul>
       <div class="price-filter">
         <label>Ціна, грн</label>
         <div class="price-range">
-          <input type="number" [(ngModel)]="minPrice" (ngModelChange)="onPriceFilterChange()" min="0">
-          <input type="number" [(ngModel)]="maxPrice" (ngModelChange)="onPriceFilterChange()" min="0">
+          <input type="number" [(ngModel)]="minPrice" (ngModelChange)="onPriceFilterChange()" min="0" />
+          <input type="number" [(ngModel)]="maxPrice" (ngModelChange)="onPriceFilterChange()" min="0" />
         </div>
         <button (click)="onPriceFilterChange()">OK</button>
         <button (click)="resetPriceFilter()">Скинути</button>
@@ -54,33 +122,91 @@
     <section class="products">
       <div class="sort">
         <span>Сортувати:</span>
-        <a href="#" class="active">за популярністю</a>
-        <a href="#">спочатку дешевше</a>
-        <a href="#">спочатку дорожчі</a>
-        <a href="#">за назвою</a>
+        <a
+          href="#"
+          [class.active]="sortOption === 'popularity'"
+          (click)="sortByPopularity(); $event.preventDefault()"
+        >за популярністю</a
+        >
+        <a
+          href="#"
+          [class.active]="sortOption === 'price-asc'"
+          (click)="sortByPriceAsc(); $event.preventDefault()"
+        >спочатку дешевше</a
+        >
+        <a
+          href="#"
+          [class.active]="sortOption === 'price-desc'"
+          (click)="sortByPriceDesc(); $event.preventDefault()"
+        >спочатку дорожчі</a
+        >
+        <a
+          href="#"
+          [class.active]="sortOption === 'name'"
+          (click)="sortByName(); $event.preventDefault()"
+        >за назвою</a
+        >
         <div class="view-options">
           <span>Відображення:</span>
-          <button class="grid-view">☰</button>
-          <button class="list-view">≡</button>
+          <button
+            class="grid-view"
+            [class.active]="viewMode === 'grid'"
+            (click)="setView('grid')"
+          >
+            ☰
+          </button>
+          <button
+            class="list-view"
+            [class.active]="viewMode === 'list'"
+            (click)="setView('list')"
+          >
+            ≡
+          </button>
         </div>
       </div>
 
-      <div class="product-list">
-        <div class="product" *ngFor="let product of filteredProducts; trackBy: trackById">
-          <!-- Додаємо routerLink для переходу на сторінку детального перегляду -->
-          <a class="product-link" [routerLink]="['/product', product.id]" [queryParams]="{ category: product.category, subcategory: product.subcategory }">
-            <img [src]="product.image" [alt]="product.name">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.price }} грн</p>
-            <button class="availability-btn">В наявності</button>
-            <!-- Іконки, які з’являються при наведенні -->
-            <div class="product-actions">
-              <button class="action-btn cart-btn" (click)="addToCart(product, $event)">🛒</button>
-              <button class="action-btn wishlist-btn" (click)="addToWishlist(product, $event)">♡</button>
-              <button class="action-btn compare-btn" (click)="addToCompare(product, $event)">⇄</button>
+      <div class="product-list" [ngClass]="viewMode">
+        @if (filteredProducts.length > 0) {
+          @for (product of filteredProducts; track product.id) {
+            <div class="product">
+              <a
+                class="product-link"
+                [routerLink]="['/product', product.id]"
+                [queryParams]="{ category: product.category, subcategory: product.subcategory }"
+              >
+                <img
+                  [src]="product.image || 'https://via.placeholder.com/200'"
+                  [alt]="product.name"
+                />
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }} грн</p>
+                <button class="availability-btn">В наявності</button>
+                <div class="product-actions">
+                  <button
+                    class="action-btn cart-btn"
+                    (click)="addToCart(product, $event)"
+                  >
+                    🛒
+                  </button>
+                  <button
+                    class="action-btn wishlist-btn"
+                    (click)="addToWishlist(product, $event)"
+                  >
+                    ♡
+                  </button>
+                  <button
+                    class="action-btn compare-btn"
+                    (click)="addToCompare(product, $event)"
+                  >
+                    ⇄
+                  </button>
+                </div>
+              </a>
             </div>
-          </a>
-        </div>
+          }
+        } @else {
+          <p>Продукти не знайдено.</p>
+        }
       </div>
     </section>
   </div>

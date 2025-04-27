@@ -1,66 +1,112 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService, Product } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+import { WishlistService } from '../../services/wishlist.service';
+import { CompareService } from '../../services/compare.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  category: string | null = null;
-  subcategory: string | null = null;
+  category: string | undefined = undefined; // Змінюємо null на undefined
+  subcategory: string | undefined = undefined; // Змінюємо null на undefined
   products: Product[] = [];
   filteredProducts: Product[] = [];
   minPrice: number = 0;
   maxPrice: number = 5000;
+  viewMode: 'grid' | 'list' = 'grid';
+  sortOption: string = 'popularity';
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private cartService: CartService,
+    private wishlistService: WishlistService,
+    private compareService: CompareService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       console.log('Query params:', params);
-      this.category = params['category'] || 'men';
-      this.subcategory = params['subcategory'] || null;
+      this.category = params['category'] || undefined; // Змінюємо null на undefined
+      this.subcategory = params['subcategory'] || undefined; // Змінюємо null на undefined
       this.loadProducts();
     });
   }
 
   loadProducts(): void {
-    if (this.category) {
-      if (this.subcategory) {
-        this.productService.getProductsByCategoryAndSubcategory(this.category, this.subcategory).subscribe(products => {
-          this.products = products;
-          this.applyPriceFilter();
-        });
-      } else {
-        this.productService.getProductsByCategory(this.category).subscribe(products => {
-          this.products = products;
-          this.applyPriceFilter();
-        });
-      }
-    }
+    this.productService.getProducts(this.category, this.subcategory).subscribe({
+      next: (products: Product[]) => {
+        this.products = products;
+        this.applyFiltersAndSort();
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+      },
+    });
   }
 
-  applyPriceFilter(): void {
-    this.filteredProducts = this.products.filter(product =>
-      product.price >= this.minPrice && product.price <= this.maxPrice
+  applyFiltersAndSort(): void {
+    let filtered = this.products.filter(
+      (product) => product.price >= this.minPrice && product.price <= this.maxPrice
     );
+
+    if (this.sortOption === 'popularity') {
+      filtered.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+    } else if (this.sortOption === 'price-asc') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (this.sortOption === 'price-desc') {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (this.sortOption === 'name') {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    this.filteredProducts = filtered;
   }
 
   onPriceFilterChange(): void {
-    this.applyPriceFilter();
+    this.applyFiltersAndSort();
   }
 
   resetPriceFilter(): void {
     this.minPrice = 0;
     this.maxPrice = 5000;
-    this.applyPriceFilter();
+    this.applyFiltersAndSort();
+  }
+
+  sortByPopularity(): void {
+    this.sortOption = 'popularity';
+    this.applyFiltersAndSort();
+  }
+
+  sortByPriceAsc(): void {
+    this.sortOption = 'price-asc';
+    this.applyFiltersAndSort();
+  }
+
+  sortByPriceDesc(): void {
+    this.sortOption = 'price-desc';
+    this.applyFiltersAndSort();
+  }
+
+  sortByName(): void {
+    this.sortOption = 'name';
+    this.applyFiltersAndSort();
+  }
+
+  setView(mode: 'grid' | 'list'): void {
+    this.viewMode = mode;
   }
 
   trackById(index: number, product: Product): number {
@@ -68,20 +114,38 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: Product, event: Event): void {
-    event.stopPropagation(); // Зупиняємо перехід на сторінку товару при натисканні на іконку
-    console.log(`Додано ${product.name} до кошика`);
-    // Додайте логіку для додавання в кошик
+    event.stopPropagation();
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      image: product.image,
+    });
+    alert(`${product.name} додано до кошика!`);
   }
 
   addToWishlist(product: Product, event: Event): void {
     event.stopPropagation();
-    console.log(`Додано ${product.name} до обраного`);
-    // Додайте логіку для додавання в обране
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+    this.wishlistService.addToWishlist(product);
+    alert(`${product.name} додано до обраного!`);
   }
 
   addToCompare(product: Product, event: Event): void {
     event.stopPropagation();
-    console.log(`Додано ${product.name} до порівняння`);
-    // Додайте логіку для додавання в порівняння
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+    this.compareService.addToCompare(product);
+    alert(`${product.name} додано до порівняння!`);
   }
 }

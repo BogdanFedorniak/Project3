@@ -1,0 +1,58 @@
+.compare-container {
+  padding: 20px;
+  background-color: #000;
+  color: white;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .compare-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .compare-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .item-details {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ff3366;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+  }
+}

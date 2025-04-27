@@ -1,0 +1,21 @@
+<div class="wishlist-container container py-5">
+  <h2>Обране</h2>
+  @if (wishlistItems.length > 0) {
+    <div class="wishlist-items">
+      @for (item of wishlistItems; track item.id) {
+        <div class="wishlist-item">
+          <img [src]="item.image || 'https://via.placeholder.com/100'" [alt]="item.name" />
+          <div class="item-details">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.price }} грн</p>
+            <a [routerLink]="['/product', item.id]" class="btn btn-primary">Переглянути</a>
+            <button class="btn btn-danger" (click)="removeFromWishlist(item.id)">Видалити</button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <p>Ваше обране порожнє.</p>
+    <a [routerLink]="['/products']" class="btn btn-primary">Продовжити покупки</a>
+  }
+</div>

@@ -1,0 +1,50 @@
+<div class="compare-container container py-5">
+  <h2>Порівняння товарів</h2>
+  @if (compareItems.length > 0) {
+    <table class="compare-table">
+      <thead>
+      <tr>
+        <th></th>
+        @for (item of compareItems; track item.id) {
+          <th>
+            <img [src]="item.image || 'https://via.placeholder.com/100'" [alt]="item.name" />
+            <h3>{{ item.name }}</h3>
+            <button class="btn btn-danger" (click)="removeFromCompare(item.id)">Видалити</button>
+          </th>
+        }
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Ціна</td>
+        @for (item of compareItems; track item.id) {
+          <td>{{ item.price }} грн</td>
+        }
+      </tr>
+      <tr>
+        <td>Категорія</td>
+        @for (item of compareItems; track item.id) {
+          <td>{{ item.category }}</td>
+        }
+      </tr>
+      <tr>
+        <td>Підкатегорія</td>
+        @for (item of compareItems; track item.id) {
+          <td>{{ item.subcategory }}</td>
+        }
+      </tr>
+      <tr>
+        <td>Дії</td>
+        @for (item of compareItems; track item.id) {
+          <td>
+            <a [routerLink]="['/product', item.id]" class="btn btn-primary">Переглянути</a>
+          </td>
+        }
+      </tr>
+      </tbody>
+    </table>
+  } @else {
+    <p>Немає товарів для порівняння.</p>
+    <a [routerLink]="['/products']" class="btn btn-primary">Продовжити покупки</a>
+  }
+</div>

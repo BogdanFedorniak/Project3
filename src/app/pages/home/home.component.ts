@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Додаємо CommonModule
+import { CommonModule } from '@angular/common';
+
+interface Slide {
+  image: string;
+  alt: string;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  standalone: true, // Позначаємо як standalone
-  imports: [CommonModule] // Імпортуємо CommonModule
+  standalone: true,
+  imports: [CommonModule]
 })
 export class HomeComponent implements OnInit {
   categories = [
@@ -28,11 +33,35 @@ export class HomeComponent implements OnInit {
     { name: 'Сонцезахисні окуляри', price: '600', image: '/assets/images/sunglasses1.png' }
   ];
 
-  ngOnInit(): void {}
+  slides: Slide[] = [
+    { image: '/assets/images/hero-image.png', alt: 'Hero Image 1' },
+    { image: '/assets/images/hero2-image.png', alt: 'Hero Image 2' }
+  ];
+  currentSlide = 0;
+  isExpanded = false;
 
-  isExpanded = false; // Початковий стан: згорнуто
+  ngOnInit(): void {
+    this.autoSlide();
+    console.log('Slides initialized:', this.slides.map(s => ({ image: s.image, loaded: new Image().src = s.image })));
+  }
 
-  toggleExpand() {
-    this.isExpanded = !this.isExpanded; // Перемикаємо стан
+  toggleExpand(): void {
+    this.isExpanded = !this.isExpanded;
+  }
+
+  nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    console.log('Next slide:', this.currentSlide);
+  }
+
+  prevSlide(): void {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+    console.log('Prev slide:', this.currentSlide);
+  }
+
+  autoSlide(): void {
+    setInterval(() => {
+      this.nextSlide();
+    }, 5000);
   }
 }

@@ -1,0 +1,32 @@
+<div class="login-container">
+  <h2>Увійти</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Логін:</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+      />
+    </div>
+    <div>
+      <label for="password">Пароль:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+    @if (error) {
+      <div class="error">{{ error }}</div>
+    }
+    <button type="submit">Увійти</button>
+  </form>
+  <p>
+    Немає акаунта? <a routerLink="/register">Зареєструватися</a>
+  </p>
+</div>

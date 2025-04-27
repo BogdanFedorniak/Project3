@@ -1,0 +1,56 @@
+<div class="chat-modal" [class.dark]="theme === 'dark'">
+  <div class="chat-header">
+    <h3>Підтримка клієнтів</h3>
+    <div class="header-actions">
+      <button class="theme-toggle" (click)="toggleTheme()" [title]="theme === 'light' ? 'Темна тема' : 'Світла тема'">
+        <span class="material-symbols-outlined">{{ theme === 'light' ? 'dark_mode' : 'light_mode' }}</span>
+      </button>
+      <button class="icon-btn" (click)="clearChat()" title="Очистити чат">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+  </div>
+  <div class="chat-history" #chatHistory>
+    <div *ngFor="let msg of messages" [class]="msg.role">
+      <div class="message-content">
+        <div class="message-text">{{ msg.content }}</div>
+        <div class="message-image" *ngIf="msg.image">
+          <img [src]="msg.image" alt="Зображення" />
+        </div>
+        <div class="message-buttons" *ngIf="msg.buttons">
+          <button *ngFor="let button of msg.buttons" (click)="executeButtonAction(button.action)">
+            {{ button.label }}
+          </button>
+        </div>
+        <div class="message-timestamp">{{ msg.timestamp }}</div>
+      </div>
+    </div>
+    <div class="typing-indicator" *ngIf="showTyping">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loader" *ngIf="isLoading">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <div class="chat-input">
+    <textarea [(ngModel)]="message" placeholder="Напишіть повідомлення..." class="form-control" (keyup.enter)="sendMessage()" [disabled]="isLoading || showTyping"></textarea>
+    <button class="emoji-btn" (click)="showEmojiPicker = !showEmojiPicker">
+      <span class="material-symbols-outlined">mood</span>
+    </button>
+    <button class="send-btn" (click)="sendMessage()" [disabled]="!message.trim() || isLoading || showTyping">
+      <span class="material-symbols-outlined">send</span>
+    </button>
+    <div class="emoji-picker" *ngIf="showEmojiPicker">
+      <button *ngFor="let emoji of emojis" (click)="addEmoji(emoji)">{{ emoji }}</button>
+    </div>
+  </div>
+  <div class="chat-footer">
+    <div class="quick-links">
+      <span>Швидкий доступ:</span>
+      <a href="/category/men">Чоловікам</a>
+      <a href="/category/women">Жінкам</a>
+      <a href="/category/shoes">Взуття</a>
+    </div>
+  </div>
+</div>
