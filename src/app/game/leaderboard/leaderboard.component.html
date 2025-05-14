@@ -1,0 +1,10 @@
+<div class="leaderboard-container p-3 bg-light border rounded mt-3">
+  <h3>Найкращі результати</h3>
+  <ul class="list-group">
+    <li *ngFor="let entry of scores" class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{ entry.username }} ({{ entry.date }})</span>
+      <span class="badge bg-primary rounded-pill">{{ entry.score }}</span>
+    </li>
+    <li *ngIf="!scores.length" class="list-group-item">Поки немає результатів</li>
+  </ul>
+</div>

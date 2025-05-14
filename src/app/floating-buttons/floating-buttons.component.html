@@ -1,18 +1,32 @@
 <div class="floating-buttons">
-    <!-- Кнопка "Вгору" -->
-    <button class="scroll-top" (click)="scrollToTop()" [class.visible]="showScrollButton">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 19V5M5 12l7-7 7 7"/>
-      </svg>
-    </button>
-  
-    <!-- Кнопка "Чат" -->
-    <button class="chat" (click)="openChat()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-    </button>
-  
-    <!-- Модальне вікно чату -->
-    <app-chat-modal *ngIf="isChatOpen"></app-chat-modal>
+  <!-- Кнопка "Вгору" -->
+  <button class="scroll-top" (click)="scrollToTop()" [class.visible]="showScrollButton">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- Іконка гри -->
+  <button class="game-icon" (click)="openGameModal()">
+    <i class="fas fa-gamepad"></i>
+  </button>
+
+  <!-- Кнопка "Чат" -->
+  <button class="chat" (click)="openChat()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+
+  <!-- Модальне вікно чату -->
+  <app-chat-modal *ngIf="isChatOpen"></app-chat-modal>
+
+  <!-- Модальне вікно гри -->
+  <div class="game-modal" *ngIf="isGameModalOpen">
+    <div class="game-modal-content">
+      <button class="close-button" (click)="closeGameModal()">✖</button>
+      <h2 class="text-center text-white mb-4">Гра "3 в ряд"</h2>
+      <app-game (scoreUpdate)="updateScore($event)"></app-game>
+    </div>
   </div>
+</div>

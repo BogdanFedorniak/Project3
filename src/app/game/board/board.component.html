@@ -1,0 +1,14 @@
+<div class="board-container d-grid gap-0 mx-auto">
+  <div *ngFor="let row of board; let i = index" class="d-grid" style="grid-template-columns: repeat(8, 50px);">
+    <div class="d-flex flex-row">
+      <div *ngFor="let gem of row; let j = index"
+           class="cell d-flex align-items-center justify-content-center border"
+           [ngClass]="{'selected': isSelected(i, j)}"
+           (click)="selectGem(i, j)">
+        <div *ngIf="gem" class="gem" [ngClass]="[getGemClass(gem.type), gem.matched ? 'matched' : '']">
+          <img [src]="getClothingImage(gem.type)" alt="{{ gem.type }}" class="clothing-image">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

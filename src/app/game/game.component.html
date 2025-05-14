@@ -1,0 +1,38 @@
+<div class="game-container">
+  <!-- Очки -->
+  <div class="score-section text-center mb-4">
+    <h3 class="text-white">Очки: {{ score }}</h3>
+  </div>
+
+  <!-- Гра -->
+  <div class="board-section">
+    <app-board #board (scoreUpdate)="updateScore($event)"></app-board>
+  </div>
+
+  <!-- Кнопка рестарту -->
+  <div class="restart-section text-center mt-3">
+    <button class="btn btn-warning" (click)="restartGame()">Рестарт</button>
+  </div>
+
+  <!-- Лідерборд -->
+  <div class="leaderboard-section mt-4">
+    <h3 class="text-center text-white mb-3">Лідери</h3>
+    <div class="leaderboard">
+      <div class="leaderboard-item d-flex align-items-center mb-2" *ngFor="let entry of leaderboard; let i = index">
+        <span class="medal me-2">
+          <i class="fas fa-medal" [ngClass]="{
+            'text-gold': i === 0,
+            'text-silver': i === 1,
+            'text-bronze': i === 2,
+            'text-white': i > 2
+          }"></i>
+        </span>
+        <span class="text-white flex-grow-1">{{ entry.username }}</span>
+        <span class="text-white">{{ entry.score }} очок</span>
+      </div>
+      <div class="text-center text-white mt-3" *ngIf="leaderboard.length === 0">
+        Лідерборд порожній. Будьте першим!
+      </div>
+    </div>
+  </div>
+</div>

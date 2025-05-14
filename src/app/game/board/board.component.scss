@@ -1,0 +1,61 @@
+.board-container {
+  background-color: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 5px;
+  width: 400px;
+  height: 400px;
+}
+
+.cell {
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.cell:hover {
+  background-color: #e9ecef;
+}
+
+.gem {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.clothing-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.selected {
+  background-color: #d1e7dd;
+}
+
+.matched {
+  opacity: 0.5;
+}
+
+.tshirt {
+  background-color: #f8d7da;
+}
+
+.pants {
+  background-color: #d4edda;
+}
+
+.sneakers {
+  background-color: #cce5ff;
+}
+
+.hoodie {
+  background-color: #fff3cd;
+}
+
+.jacket {
+  background-color: #e2d6f5;
+}

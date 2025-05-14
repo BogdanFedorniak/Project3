@@ -9,6 +9,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CompareComponent } from './pages/compare/compare.component';
 import { AuthGuard } from './guards/auth.guard'; // Змінюємо на AuthGuard
+import { GameComponent } from './game/game.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,4 +22,5 @@ export const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
+  { path: 'game', component: GameComponent },
 ];
